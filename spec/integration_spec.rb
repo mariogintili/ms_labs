@@ -38,8 +38,7 @@ describe "M&S Digital Labs integration scenarios" do
     it_behaves_like "M&S scenario"
   end
 
-  describe "3 pairs of jeans, 2 pairs of socks" do
-
+  xdescribe "3 pairs of jeans, 2 pairs of socks" do
     subject       { MsLabs::Order.new(products: [jeans, jeans, jeans, socks, socks], delivery_rules: delivery_rules, offer: jeans_offer) }
     let(:total)   { 103.22 }
 
