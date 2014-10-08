@@ -10,16 +10,20 @@ module MsLabs
     end
 
     def total
-      net_total     = offer.call(products).round(2)
-      shipping_cost = delivery_rules.call(net_total).round(2)
-      net_total + shipping_cost
+      net_total     = reduce_decimals offer.call(products)
+      shipping_cost = reduce_decimals delivery_rules.call(net_total)
+      (net_total + shipping_cost).round(2)
     end
 
     def add(code)
       products.push product_dictionary[code].new
     end
 
-    private 
+    private
+
+    def reduce_decimals(float)
+      (Integer(float*100)*0.01).round(2)
+    end
 
     def product_dictionary
       {
