@@ -1,3 +1,3 @@
 module MsLabs
-  autoload :Order, "lib/order"
+  autoload :Order, "ms_labs/order"
 end
