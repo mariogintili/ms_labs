@@ -51,4 +51,14 @@ describe MsLabs::Order do
       expect(subject.total).to eq(net_total + 4.95)
     end
   end
+
+  describe "#add" do
+
+    let(:jeans_code) { "J01" }
+
+    it "takes in an add code and creates the product from it" do
+      expect(Jeans).to receive(:new)
+      subject.add jeans_code
+    end
+  end
 end
