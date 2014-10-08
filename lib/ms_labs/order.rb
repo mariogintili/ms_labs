@@ -8,5 +8,11 @@ module MsLabs
       @delivery_rules = args[:delivery_rules]
       @offer          = args[:offer]
     end
+
+    def total
+      net_total     = offer.call(products).round(2)
+      shipping_cost = delivery_rules.call(net_total).round(2)
+      net_total + shipping_cost
+    end
   end
 end
