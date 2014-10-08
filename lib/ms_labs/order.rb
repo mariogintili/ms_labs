@@ -16,7 +16,7 @@ module MsLabs
     end
 
     def add(code)
-      products.push product_dictionary[code].new
+      products.push product_dictionary.fetch(code).new
     end
 
     private
