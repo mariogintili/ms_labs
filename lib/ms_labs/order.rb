@@ -19,7 +19,6 @@ module MsLabs
       products.push product_dictionary[code].new
     end
 
-
     private 
 
     def product_dictionary
