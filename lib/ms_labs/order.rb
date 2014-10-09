@@ -16,21 +16,13 @@ module MsLabs
     end
 
     def add(code)
-      products.push product_dictionary.fetch(code).new
+      products.push Product.new(code)
     end
 
     private
 
     def reduce_decimals(float)
       (Integer(float*100)*0.01).round(2)
-    end
-
-    def product_dictionary
-      {
-        "J01" => Jeans,
-        "B01" => Blouse,
-        "S01" => Socks,
-      }
     end
   end
 end

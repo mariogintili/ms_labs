@@ -2,10 +2,12 @@ require "spec_helper"
 
 describe "M&S Digital Labs integration scenarios" do
 
-  let(:jean_code) { "J01" }
-  let(:jeans)     { Product::Jeans.new }
-  let(:blouse)    { Product::Blouse.new }
-  let(:socks)     { Product::Socks.new }
+  let(:jeans_code)  { "J01" }
+  let(:blouse_code) { "B01" }
+  let(:socks_code)  { "S01" }
+  let(:jeans)     { Product.new(jeans_code) }
+  let(:blouse)    { Product.new(blouse_code) }
+  let(:socks)     { Product.new(socks_code) }
 
   shared_examples "M&S scenario" do
 
@@ -38,9 +40,9 @@ describe "M&S Digital Labs integration scenarios" do
     it_behaves_like "M&S scenario"
   end
 
-  xdescribe "3 pairs of jeans, 2 pairs of socks" do
+  describe "3 pairs of jeans, 2 pairs of socks" do
     subject       { MsLabs::Order.new(products: [jeans, jeans, jeans, socks, socks], delivery_rules: delivery_rules, offer: jeans_offer) }
-    let(:total)   { 103.22 }
+    let(:total)   { 98.27 }
 
     it_behaves_like "M&S scenario"
   end

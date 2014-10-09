@@ -1,45 +1,18 @@
 module MsLabs
   class Product
 
-    def code
-      raise NotImplementedError
-    end
+    attr_reader :code
+    attr_accessor :price 
 
-    def price
-      raise NotImplementedError
-    end
-  end
+    REFERENCE = {
+      "J01" => { price: 32.95 },
+      "B01" => { price: 24.95 },
+      "S01" => { price: 7.95 },
+    }
 
-  class Jeans < Product
-
-    def code
-      "J01"
-    end
-
-    def price
-      32.95
-    end
-  end
-
-  class Blouse < Product
-
-    def code
-      "B01"
-    end
-
-    def price
-      24.95
-    end
-  end
-
-  class Socks < Product
-
-    def code
-      "S01"
-    end
-
-    def price
-      7.95
+    def initialize(code)
+      @code  = code
+      @price = REFERENCE.fetch(code)[:price]
     end
   end
 end

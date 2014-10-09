@@ -19,27 +19,27 @@ describe MsLabs::Product do
     end
   end
 
-  describe "::Jeans" do
+  describe "Jeans" do
 
-    let(:product) { Product::Jeans.new }
+    let(:product) { Product.new(code) }
     let(:price)   { 32.95 }
     let(:code)    { "J01" }
 
     it_behaves_like "a registered product"
   end
 
-  describe "::Blouse" do
+  describe "Blouse" do
 
-    let(:product) { Product::Blouse.new }
+    let(:product) { Product.new(code) }
     let(:price)   { 24.95 }
     let(:code)    { "B01" }
 
     it_behaves_like "a registered product" 
   end
 
-  describe "::Socks" do
+  describe "Socks" do
 
-    let(:product) { Product::Socks.new }
+    let(:product) { Product.new(code) }
     let(:price)   { 7.95 }
     let(:code)    { "S01"}
 
