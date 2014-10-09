@@ -30,8 +30,8 @@ end
 
 def jeans_offer
   ->(products) do
-    jeans  = products.select { |p| p.code == jean_code }
-    others = products.reject { |p| p.code == jean_code }
+    jeans  = products.select { |p| p.code == "J01" }
+    others = products.reject { |p| p.code == "J01" }
     if jeans.any?
       discounted_jeans_price = reduce_half_per_pair(jeans)
     else

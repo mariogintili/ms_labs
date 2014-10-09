@@ -32,3 +32,36 @@ If you want to play with the **application's console** set ``CONSOLE`` to ``true
  $ CONSOLE=true bundle exec rspec
 ```
 
+### See it in action
+
+```ruby
+def delivery_rules
+  ->(total) do
+    case 
+    when 50.0 > total
+      4.95
+    when total.between?(50.0, 90.0)
+      2.95
+    when total > 90
+      0.0
+    end
+  end
+end
+
+def offer
+  ->(products) { products.map(&:price).inject(:+) / 2.0 }
+end
+
+products = [Jeans.new, Socks.new]
+
+order = Order.new products: products, delivery_rules: delivery_rules, offer: offer
+=> #<MsLabs::Order:0x000001023cf6d8
+ @delivery_rules=#<Proc:0x000001023cf7a0@(pry):29 (lambda)>,
+ @offer=#<Proc:0x000001023cf728@(pry):41 (lambda)>,
+ @products=[#<MsLabs::Jeans:0x000001025517e0>, #<MsLabs::Socks:0x000001025517b8>]>
+
+ order.total
+ => 25.4
+
+```
+
