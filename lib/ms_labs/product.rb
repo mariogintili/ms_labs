@@ -1,18 +1,23 @@
 module MsLabs
   class Product
+    class << self
+
+      attr_accessor :datasource
+    end
+
+    def self.find(code)
+      instance = new(code: code, price: nil)
+      instance.price = datasource.fetch(code)[:price]
+      instance
+    end
 
     attr_reader :code
     attr_accessor :price 
 
-    REFERENCE = {
-      "J01" => { price: 32.95 },
-      "B01" => { price: 24.95 },
-      "S01" => { price: 7.95 },
-    }
 
-    def initialize(code)
+    def initialize(code: nil, price: nil)
       @code  = code
-      @price = REFERENCE.fetch(code)[:price]
+      @price = price
     end
   end
 end

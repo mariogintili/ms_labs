@@ -4,17 +4,6 @@ require "pry"
 
 include MsLabs
 
-def reduce_half_per_pair(jeans)
-  result = jeans.each_slice(2).map do |jeans_array|
-    if jeans_array.length == 2
-      jeans_array.first.price + (jeans_array.first.price / 2.0)
-    else
-      jeans_array.first.price
-    end
-  end
-  result.inject(:+)
-end
-
 def delivery_rules
   ->(total) do
     case 
@@ -29,16 +18,15 @@ def delivery_rules
 end
 
 def jeans_offer
-  ->(products) do
-    jeans  = products.select { |p| p.code == "J01" }
-    others = products.reject { |p| p.code == "J01" }
-    if jeans.any?
-      discounted_jeans_price = reduce_half_per_pair(jeans)
-    else
-      discounted_jeans_price = 0.0
-    end
-    discounted_jeans_price + others.map(&:price).inject(:+).to_f
-  end
+  BuyOneGetOneHalfPrice.new(Product.find("J01"))
+end
+
+def default_datasource
+  {
+    "J01" => { price: 32.95 },
+    "B01" => { price: 24.95 },
+    "S01" => { price: 7.95 },
+  }
 end
 
 def test_console
@@ -49,6 +37,10 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     test_console
+  end
+
+  config.before do
+    MsLabs::Product.datasource = default_datasource
   end
 
   config.expect_with :rspec do |expectations|

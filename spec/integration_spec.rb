@@ -5,9 +5,9 @@ describe "M&S Digital Labs integration scenarios" do
   let(:jeans_code)  { "J01" }
   let(:blouse_code) { "B01" }
   let(:socks_code)  { "S01" }
-  let(:jeans)     { Product.new(jeans_code) }
-  let(:blouse)    { Product.new(blouse_code) }
-  let(:socks)     { Product.new(socks_code) }
+  let(:jeans)     { Product.find(jeans_code) }
+  let(:blouse)    { Product.find(blouse_code) }
+  let(:socks)     { Product.find(socks_code) }
 
   shared_examples "M&S scenario" do
 
