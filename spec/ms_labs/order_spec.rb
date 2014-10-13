@@ -45,7 +45,7 @@ describe MsLabs::Order do
     let(:jeans_code) { "J01" }
 
     it "takes in an add code and creates the product from it" do
-      expect(Jeans).to receive(:new)
+      expect(Product).to receive(:new).with(jeans_code)
       subject.add jeans_code
     end
   end

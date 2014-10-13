@@ -1,45 +1,23 @@
 module MsLabs
   class Product
+    class << self
 
-    def code
-      raise NotImplementedError
+      attr_accessor :datasource
     end
 
-    def price
-      raise NotImplementedError
-    end
-  end
-
-  class Jeans < Product
-
-    def code
-      "J01"
+    def self.find(code)
+      instance = new(code: code, price: nil)
+      instance.price = datasource.fetch(code)[:price]
+      instance
     end
 
-    def price
-      32.95
-    end
-  end
+    attr_reader :code
+    attr_accessor :price 
 
-  class Blouse < Product
 
-    def code
-      "B01"
-    end
-
-    def price
-      24.95
-    end
-  end
-
-  class Socks < Product
-
-    def code
-      "S01"
-    end
-
-    def price
-      7.95
+    def initialize(code: nil, price: nil)
+      @code  = code
+      @price = price
     end
   end
 end

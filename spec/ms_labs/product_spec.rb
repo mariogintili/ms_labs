@@ -2,47 +2,35 @@ require "spec_helper"
 
 describe MsLabs::Product do
 
-  shared_examples "a registered product" do
+  describe "#initialize" do
 
-    context "#code" do
+    subject { Product.new(code: "hello", price: 100) }
 
-      it "returns its code" do
-        expect(product.code).to eq code
-      end
-    end
-
-    context "#price" do
-
-      it "returns its price" do
-        expect(product.price).to eq price
-      end
+    it "receives a set of options and sets them as attributes" do
+      expect(subject.code).to eq "hello"
+      expect(subject.price).to eq 100
     end
   end
 
-  describe "::Jeans" do
+  describe ".find" do
 
-    let(:product) { Product::Jeans.new }
-    let(:price)   { 32.95 }
-    let(:code)    { "J01" }
+    context "with a found product" do
 
-    it_behaves_like "a registered product"
-  end
+      subject { Product.find("J01") }
 
-  describe "::Blouse" do
+      it "returns the valid code and price" do
+        expect(subject.price).to eq 32.95
+        expect(subject.code).to eq "J01"
+      end
+    end
 
-    let(:product) { Product::Blouse.new }
-    let(:price)   { 24.95 }
-    let(:code)    { "B01" }
+    context "without a found product" do
 
-    it_behaves_like "a registered product" 
-  end
+      subject { Product.find("lorem") }
 
-  describe "::Socks" do
-
-    let(:product) { Product::Socks.new }
-    let(:price)   { 7.95 }
-    let(:code)    { "S01"}
-
-    it_behaves_like "a registered product" 
+      it "throws an error" do
+        expect{subject}.to raise_error
+      end
+    end
   end
 end

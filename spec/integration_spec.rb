@@ -2,10 +2,12 @@ require "spec_helper"
 
 describe "M&S Digital Labs integration scenarios" do
 
-  let(:jean_code) { "J01" }
-  let(:jeans)     { Product::Jeans.new }
-  let(:blouse)    { Product::Blouse.new }
-  let(:socks)     { Product::Socks.new }
+  let(:jeans_code)  { "J01" }
+  let(:blouse_code) { "B01" }
+  let(:socks_code)  { "S01" }
+  let(:jeans)     { Product.find(jeans_code) }
+  let(:blouse)    { Product.find(blouse_code) }
+  let(:socks)     { Product.find(socks_code) }
 
   shared_examples "M&S scenario" do
 
